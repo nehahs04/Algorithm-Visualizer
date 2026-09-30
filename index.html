@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Algorithm Visualizer | By Neha H S</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header class="header">
+    <div class="logo-group">
+      <span class="logo-icon">⚡</span>
+      <div>
+        <h1>Algorithm Visualizer</h1>
+        <p class="subtitle">Research Project by <strong>Neha H S</strong> • Published in IJCRT</p>
+      </div>
+    </div>
+    <div class="tab-controls">
+      <button id="tab-sorting" class="tab-btn active">📊 Sorting Visualizer</button>
+      <button id="tab-pathfinding" class="tab-btn">🕸️ Graph Pathfinding</button>
+    </div>
+  </header>
+
+  <!-- Notification Banner -->
+  <div class="research-banner">
+    <span>📜 <strong>Research Publication:</strong> This interactive algorithmic pedagogical framework was published in the <em>International Journal of Creative Research Thoughts (IJCRT)</em>.</span>
+    <a href="#about" class="banner-link">View Details →</a>
+  </div>
+
+  <main class="main-container">
+    <!-- ==================== SORTING SECTION ==================== -->
+    <section id="sorting-view" class="view-section active">
+      <div class="control-panel">
+        <div class="control-group">
+          <label for="sort-algo-select">Algorithm</label>
+          <select id="sort-algo-select">
+            <option value="quicksort">Quick Sort</option>
+            <option value="mergesort">Merge Sort</option>
+            <option value="heapsort">Heap Sort</option>
+            <option value="bubblesort">Bubble Sort</option>
+            <option value="insertionsort">Insertion Sort</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="array-size-slider">Array Size: <span id="array-size-val">45</span></label>
+          <input type="range" id="array-size-slider" min="15" max="90" value="45" />
+        </div>
+
+        <div class="control-group">
+          <label for="sort-speed-slider">Speed: <span id="sort-speed-val">Fast</span></label>
+          <input type="range" id="sort-speed-slider" min="1" max="100" value="85" />
+        </div>
+
+        <div class="btn-group">
+          <button id="btn-generate-array" class="btn btn-secondary">🔄 New Array</button>
+          <button id="btn-start-sort" class="btn btn-primary">▶ Start Sort</button>
+          <button id="btn-sound-toggle" class="btn btn-toggle active">🔊 Audio: ON</button>
+        </div>
+      </div>
+
+      <!-- Sorting Visualization Canvas -->
+      <div class="canvas-wrapper">
+        <div id="sorting-container" class="bars-container"></div>
+      </div>
+
+      <!-- Complexity & Metric Card -->
+      <div class="stats-panel">
+        <div class="stat-card">
+          <h4>Algorithm</h4>
+          <p id="stat-algo-name">Quick Sort</p>
+        </div>
+        <div class="stat-card">
+          <h4>Best Case</h4>
+          <p id="stat-best">O(n log n)</p>
+        </div>
+        <div class="stat-card">
+          <h4>Average Case</h4>
+          <p id="stat-avg">O(n log n)</p>
+        </div>
+        <div class="stat-card">
+          <h4>Worst Case</h4>
+          <p id="stat-worst">O(n²)</p>
+        </div>
+        <div class="stat-card">
+          <h4>Space Complexity</h4>
+          <p id="stat-space">O(log n)</p>
+        </div>
+        <div class="stat-card">
+          <h4>Comparisons / Ops</h4>
+          <p id="stat-ops">0</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PATHFINDING SECTION ==================== -->
+    <section id="pathfinding-view" class="view-section">
+      <div class="control-panel">
+        <div class="control-group">
+          <label for="path-algo-select">Graph Algorithm</label>
+          <select id="path-algo-select">
+            <option value="dijkstra">Dijkstra's Algorithm (Weighted)</option>
+            <option value="bellmanford">Bellman-Ford Algorithm (Weighted)</option>
+            <option value="bfs">Breadth-First Search (BFS - Unweighted)</option>
+            <option value="dfs">Depth-First Search (DFS - Unweighted)</option>
+          </select>
+        </div>
+
+        <div class="btn-group">
+          <button id="btn-clear-path" class="btn btn-secondary">🧹 Clear Path</button>
+          <button id="btn-clear-walls" class="btn btn-secondary">🧱 Clear Walls</button>
+          <button id="btn-generate-maze" class="btn btn-secondary">🎲 Random Maze</button>
+          <button id="btn-start-path" class="btn btn-primary">🚀 Find Shortest Path</button>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="legend-bar">
+        <div class="legend-item"><span class="legend-color start"></span> Start Node</div>
+        <div class="legend-item"><span class="legend-color target"></span> Target Node</div>
+        <div class="legend-item"><span class="legend-color wall"></span> Wall / Obstacle</div>
+        <div class="legend-item"><span class="legend-color visited"></span> Visited Node</div>
+        <div class="legend-item"><span class="legend-color path"></span> Shortest Path</div>
+      </div>
+
+      <p class="instruction-hint">💡 <em>Click and drag on the grid to create walls or obstacles. Drag Start / Target markers to reposition them!</em></p>
+
+      <!-- Pathfinding Grid Container -->
+      <div class="grid-wrapper">
+        <div id="grid-container" class="grid-table"></div>
+      </div>
+
+      <div class="stats-panel">
+        <div class="stat-card">
+          <h4>Graph Algorithm</h4>
+          <p id="graph-stat-name">Dijkstra's Algorithm</p>
+        </div>
+        <div class="stat-card">
+          <h4>Guarantees Shortest?</h4>
+          <p id="graph-stat-guarantee">Yes</p>
+        </div>
+        <div class="stat-card">
+          <h4>Time Complexity</h4>
+          <p id="graph-stat-time">O((V + E) log V)</p>
+        </div>
+        <div class="stat-card">
+          <h4>Nodes Visited</h4>
+          <p id="graph-stat-visited">0</p>
+        </div>
+        <div class="stat-card">
+          <h4>Path Length</h4>
+          <p id="graph-stat-length">0</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Reference Section -->
+    <section id="about" class="info-section">
+      <h3>📚 Research Publication & Project Background</h3>
+      <p>
+        This platform was researched and engineered by <strong>Neha H S</strong> during her undergraduate program at <strong>Global Academy of Technology</strong>.
+        The motivation stems from the cognitive load students face when interpreting dynamic pointers, recursive stack memory, and relaxation steps in classical data structures and graph theory.
+      </p>
+      <div class="citation-box">
+        <strong>Paper Title:</strong> Interactive Real-Time Visualization Framework for Asymptotic Analysis and Traversal in Complex Graph Networks & Sorting Heuristics<br />
+        <strong>Author:</strong> Neha H S<br />
+        <strong>Journal:</strong> International Journal of Creative Research Thoughts (IJCRT)
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Engineered with ❤️ by <a href="https://github.com/nehahs04" target="_blank">Neha H S</a> • Information Science & Engineering</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
