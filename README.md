@@ -28,7 +28,8 @@ This project originated as an undergraduate research initiative by **Neha H S** 
   - **Merge Sort** (Divide-and-Conquer Recursive Reconstruction)
   - **Heap Sort** (Max-Heapify and In-place Swapping)
   - **Bubble Sort** (Adjacent Element Bubbling)
-  - **Insertion Sort**
+  - **Insertion Sort** (Incremental Element Insertion with Real-Time Shift Tracing)
+  - **Selection Sort** (Iterative Minimum-Finding and In-Place Swapping)
 - **Dynamic Array Controls:** Real-time array size slider (15 to 90 elements), speed adjuster, and instant re-shuffling.
 - **Audio Synthesizer:** Real-time acoustic frequency synthesis powered by Web Audio API based on relative element magnitude.
 - **Real-Time Metrics:** Tracks comparisons, operations, and dynamic asymptotic complexity indicators (Best, Average, Worst, and Space complexity).
@@ -55,6 +56,8 @@ This project originated as an undergraduate research initiative by **Neha H S** 
 | **Merge Sort** | Sorting | $\Omega(n \log n)$ | $\Theta(n \log n)$ | $O(n \log n)$ | $O(n)$ |
 | **Heap Sort** | Sorting | $\Omega(n \log n)$ | $\Theta(n \log n)$ | $O(n \log n)$ | $O(1)$ |
 | **Bubble Sort** | Sorting | $\Omega(n)$ | $\Theta(n^2)$ | $O(n^2)$ | $O(1)$ |
+| **Insertion Sort** | Sorting | $\Omega(n)$ | $\Theta(n^2)$ | $O(n^2)$ | $O(1)$ |
+| **Selection Sort** | Sorting | $\Omega(n^2)$ | $\Theta(n^2)$ | $O(n^2)$ | $O(1)$ |
 | **Dijkstra** | Graph | $O(V \log V + E)$ | $O((V + E) \log V)$ | $O((V + E) \log V)$ | $O(V)$ |
 | **Bellman-Ford** | Graph | $O(E)$ | $O(V \cdot E)$ | $O(V \cdot E)$ | $O(V)$ |
 | **BFS / DFS** | Graph | $O(V + E)$ | $O(V + E)$ | $O(V + E)$ | $O(V)$ |

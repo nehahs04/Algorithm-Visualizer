@@ -82,7 +82,8 @@ const sortMetadata = {
   mergesort: { name: "Merge Sort", best: "O(n log n)", avg: "O(n log n)", worst: "O(n log n)", space: "O(n)" },
   heapsort: { name: "Heap Sort", best: "O(n log n)", avg: "O(n log n)", worst: "O(n log n)", space: "O(1)" },
   bubblesort: { name: "Bubble Sort", best: "O(n)", avg: "O(n²)", worst: "O(n²)", space: "O(1)" },
-  insertionsort: { name: "Insertion Sort", best: "O(n)", avg: "O(n²)", worst: "O(n²)", space: "O(1)" }
+  insertionsort: { name: "Insertion Sort", best: "O(n)", avg: "O(n²)", worst: "O(n²)", space: "O(1)" },
+  selectionsort: { name: "Selection Sort", best: "O(n²)", avg: "O(n²)", worst: "O(n²)", space: "O(1)" }
 };
 
 function updateSortStats() {
@@ -334,6 +335,85 @@ async function heapify(n, i) {
   }
 }
 
+// Insertion Sort
+async function insertionSort() {
+  const bars = sortingContainer.children;
+  const n = array.length;
+  bars[0].classList.add("sorted");
+
+  for (let i = 1; i < n; i++) {
+    let key = array[i];
+    let j = i - 1;
+
+    bars[i].classList.add("comparing");
+    playNote(220 + key * 8);
+    operations++;
+    statOps.textContent = operations;
+    await sleep(getDelay());
+
+    while (j >= 0 && array[j] > key) {
+      if (!isSorting) return;
+      bars[j].classList.add("comparing");
+      playNote(200 + array[j] * 8);
+      operations++;
+      statOps.textContent = operations;
+      await sleep(getDelay());
+
+      array[j + 1] = array[j];
+      bars[j + 1].style.height = `${array[j + 1]}%`;
+      bars[j].classList.remove("comparing");
+      j--;
+    }
+
+    array[j + 1] = key;
+    bars[j + 1].style.height = `${key}%`;
+    bars[i].classList.remove("comparing");
+
+    for (let k = 0; k <= i; k++) {
+      bars[k].classList.add("sorted");
+    }
+  }
+}
+
+// Selection Sort
+async function selectionSort() {
+  const bars = sortingContainer.children;
+  const n = array.length;
+
+  for (let i = 0; i < n; i++) {
+    let minIdx = i;
+    bars[i].classList.add("comparing");
+
+    for (let j = i + 1; j < n; j++) {
+      if (!isSorting) return;
+      bars[j].classList.add("comparing");
+      playNote(200 + array[j] * 8);
+      operations++;
+      statOps.textContent = operations;
+      await sleep(getDelay());
+
+      if (array[j] < array[minIdx]) {
+        if (minIdx !== i) bars[minIdx].classList.remove("comparing");
+        minIdx = j;
+      } else {
+        bars[j].classList.remove("comparing");
+      }
+    }
+
+    if (minIdx !== i) {
+      let temp = array[i];
+      array[i] = array[minIdx];
+      array[minIdx] = temp;
+      bars[i].style.height = `${array[i]}%`;
+      bars[minIdx].style.height = `${array[minIdx]}%`;
+    }
+
+    bars[minIdx].classList.remove("comparing");
+    bars[i].classList.remove("comparing");
+    bars[i].classList.add("sorted");
+  }
+}
+
 btnStartSort.addEventListener("click", async () => {
   if (isSorting) return;
   isSorting = true;
@@ -354,6 +434,12 @@ btnStartSort.addEventListener("click", async () => {
     await mergeSort();
   } else if (algo === "heapsort") {
     await heapSort();
+  } else if (algo === "insertionsort") {
+    await insertionSort();
+    for (let b of bars) b.classList.add("sorted");
+  } else if (algo === "selectionsort") {
+    await selectionSort();
+    for (let b of bars) b.classList.add("sorted");
   }
 
   isSorting = false;
